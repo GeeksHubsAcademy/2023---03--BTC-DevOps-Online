@@ -37,28 +37,11 @@ build {
     tags = {
       Name         = "Nacho"
       Packer       = "true"
-      Provisioners = "Packer"
+      Provisioners = "Ansible"
     }
   }
 
-  provisioner "shell" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get -y upgrade",
-      "sudo apt-get install -y nginx",
-      "sudo systemctl enable nginx"
-    ]
-  }
-
-  provisioner "file" {
-    source      = "index.html"
-    destination = "/tmp/index.html"
-  }
-
-  provisioner "shell" {
-    inline = [
-      "sudo mv /tmp/index.html /var/www/html/index.html",
-      "sudo chown www-data:www-data /var/www/html/index.html"
-    ]
+  provisioner "ansible" {
+    playbook_file = "../52_ansible/webserver_packer.yml"
   }
 }
