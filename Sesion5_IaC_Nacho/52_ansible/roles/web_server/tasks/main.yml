@@ -9,9 +9,9 @@
     enabled: true
     state: started
 
-- name: HTML index file from file
-  ansible.builtin.copy:
-    src: index.html
+- name: HTML index file from template
+  ansible.builtin.template:
+    src: index-without-link.html.j2
     dest: /var/www/html/index.html
   notify:
     - Restart nginx
