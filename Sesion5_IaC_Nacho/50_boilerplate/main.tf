@@ -14,7 +14,7 @@ resource "aws_instance" "web_server" {
   subnet_id                   = data.aws_subnet.selected.id
   associate_public_ip_address = true
   vpc_security_group_ids      = [data.aws_security_group.allow_traffic.id]
-  user_data                   = file("../51_cloud-admin/web-server.yml")
+  user_data                   = file("../52_ansible/cloud-admin/ssh-user.yml")
 
   tags = {
     Name = "web_server"
