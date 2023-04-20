@@ -1,0 +1,17 @@
+---
+- name: Nginx package
+  ansible.builtin.apt:
+    name: nginx
+
+- name: Nginx started and enabled
+  ansible.builtin.service:
+    name: nginx
+    enabled: true
+    state: started
+
+- name: HTML index file from file
+  ansible.builtin.copy:
+    src: index.html
+    dest: /var/www/html/index.html
+  notify:
+    - Restart nginx
