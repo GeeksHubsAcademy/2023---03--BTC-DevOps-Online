@@ -40,4 +40,25 @@ build {
       Provisioners = "Packer"
     }
   }
+
+  provisioner "shell" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get -y upgrade",
+      "sudo apt-get install -y nginx",
+      "sudo systemctl enable nginx"
+    ]
+  }
+
+  provisioner "file" {
+    source      = "index.html"
+    destination = "/tmp/index.html"
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo mv /tmp/index.html /var/www/html/index.html",
+      "sudo chown www-data:www-data /var/www/html/index.html"
+    ]
+  }
 }
