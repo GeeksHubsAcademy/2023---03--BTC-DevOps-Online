@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-registry
+  labels:
+    app: container-registry
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: container-registry
+  template:
+    metadata:
+      labels:
+        app: container-registry
+    spec:
+      containers:
+        - name: image
+          image: placeholder
+          ports:
+            - containerPort: 80
